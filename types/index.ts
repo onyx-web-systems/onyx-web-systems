@@ -41,3 +41,8 @@ export interface Stat {
 }
 
 export type AnimationVariant = "fadeUp" | "fadeIn" | "scaleIn" | "slideRight" | "slideLeft";
+export interface SectionProps {
+  id?: string;
+  className?: string;
+  children?: ReactNode;
+}
