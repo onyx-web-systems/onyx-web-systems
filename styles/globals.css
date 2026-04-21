@@ -4,57 +4,88 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    ONYX WEB SYSTEMS — Global Stylesheet
-   Design System v1.1 — Polish Pass
+   Design System v1.2 — Depth + Contrast Pass
    ───────────────────────────────────────────────────────────────────────────── */
 
 /* ─── CSS Custom Properties ──────────────────────────────────────────────────── */
 :root {
-  --color-bg:            #0A0A0A;
-  --color-surface:       #0D0D0D;
-  --color-surface-2:     #111111;
-  --color-surface-3:     #161616;
-  --color-border:        rgba(255,255,255,0.07);
-  --color-border-strong: rgba(255,255,255,0.12);
-  --color-text:          #E8E8E8;
-  --color-text-muted:    #9A9A9A;
-  --color-text-dim:      #6B6B6B;
-  --color-text-xdim:     #3D3D3D;
-  --color-white:         #FFFFFF;
+  /* ── Section backgrounds — 3-level scale ─────────────────────────────────────
+     Level 0 (deep):    #000000  — true black, hero / CTA / max-contrast moments
+     Level 1 (base):    #0B0B0B  — primary page background
+     Level 2 (raised):  #111111  — alternating sections
+     Level 3 (surface): #161616  — cards ON level 1 sections
+     Level 4 (elevated):#1C1C1C  — cards ON level 2 sections
+  ──────────────────────────────────────────────────────────────────────────── */
+  --bg-deep:     #000000;
+  --bg-base:     #0B0B0B;
+  --bg-raised:   #111111;
+  --bg-card:     #161616;
+  --bg-card-alt: #1C1C1C;
+  --bg-input:    #141414;
 
+  /* Legacy aliases — kept for backward compat */
+  --color-bg:        #0B0B0B;
+  --color-surface:   #111111;
+  --color-surface-2: #161616;
+  --color-surface-3: #1C1C1C;
+
+  /* ── Borders ── */
+  --border-subtle:   rgba(255,255,255,0.05);
+  --border-default:  rgba(255,255,255,0.08);
+  --border-strong:   rgba(255,255,255,0.13);
+  --border-accent:   rgba(32,160,32,0.22);
+  --border-accent-strong: rgba(32,160,32,0.38);
+
+  /* Legacy */
+  --color-border:        rgba(255,255,255,0.08);
+  --color-border-strong: rgba(255,255,255,0.13);
+
+  /* ── Text ── */
+  --color-text:       #ECECEC;
+  --color-text-muted: #A0A0A0;
+  --color-text-dim:   #6E6E6E;
+  --color-text-xdim:  #404040;
+  --color-white:      #FFFFFF;
+
+  /* ── Accent ── */
   --color-accent:        #20A020;
   --color-accent-dim:    #1A831A;
   --color-accent-muted:  #0E480E;
   --color-accent-glow:   rgba(32,160,32,0.12);
   --color-accent-border: rgba(32,160,32,0.22);
 
+  /* ── Card shadows — depth scale ── */
+  --shadow-card:    0 1px 3px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-card-hover: 0 2px 6px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-elevated: 0 4px 16px rgba(0,0,0,0.5), 0 16px 48px rgba(0,0,0,0.3);
+
+  /* ── Fonts ── */
   --font-display: "Instrument Serif", Georgia, serif;
   --font-sans:    "DM Sans", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", "Fira Code", monospace;
 
-  /* Standardized section rhythm */
-  --section-y-sm:   clamp(4rem,  6vw,  5rem);
-  --section-y:      clamp(5rem,  8vw,  7.5rem);
-  --section-y-lg:   clamp(6rem, 10vw, 10rem);
+  /* ── Section spacing ── */
+  --section-y-sm:   clamp(4.5rem, 7vw,  6rem);
+  --section-y:      clamp(5.5rem, 9vw,  8rem);
+  --section-y-lg:   clamp(7rem,  11vw, 11rem);
 
   --max-width-site: 1440px;
   --gutter:         clamp(1.25rem, 5vw, 3rem);
 
-  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in:   cubic-bezier(0.7, 0, 1, 0.6);
-  --ease-io:   cubic-bezier(0.76, 0, 0.24, 1);
-  --dur-fast:  180ms;
-  --dur-base:  320ms;
-  --dur-slow:  560ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 1, 0.6);
+  --ease-io:  cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 560ms;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────────── */
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
 
   html {
-    background-color: var(--color-bg);
+    background-color: var(--bg-base);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-size: 16px;
@@ -68,20 +99,20 @@
 
   body {
     min-height: 100dvh;
-    background-color: var(--color-bg);
+    background-color: var(--bg-base);
     color: var(--color-text);
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(32,160,32,0.18);
+    background-color: rgba(32,160,32,0.2);
     color: #fff;
   }
 
   ::-webkit-scrollbar       { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: var(--color-bg); }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(32,160,32,0.4); }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(32,160,32,0.45); }
 
   :focus-visible {
     outline: 2px solid var(--color-accent);
@@ -100,11 +131,10 @@
   p   { color: var(--color-text-muted); line-height: 1.7; }
   a   { color: inherit; text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
   img, video { display: block; max-width: 100%; }
-  hr  { border-color: var(--color-border); border-top-width: 1px; margin: 0; }
+  hr  { border-color: var(--border-subtle); border-top-width: 1px; margin: 0; }
 
-  /* Native select — dark theme fix */
   select, option {
-    background-color: #1A1A1A;
+    background-color: var(--bg-card-alt);
     color: var(--color-text);
     font-family: var(--font-sans);
   }
@@ -119,8 +149,7 @@
 /* ─── Components ─────────────────────────────────────────────────────────────── */
 @layer components {
 
-  /* ── Layout ─────────────────────────────────────── */
-
+  /* ── Layout ── */
   .container-site {
     width: 100%;
     max-width: var(--max-width-site);
@@ -135,18 +164,54 @@
     padding-inline: var(--gutter);
   }
 
-  /* ── Section spacing — standardized ─────────────── */
+  /* ── Section spacing ── */
+  .section-sm { padding-block: var(--section-y-sm); }
+  .section    { padding-block: var(--section-y); }
+  .section-lg { padding-block: var(--section-y-lg); }
 
-  .section-sm  { padding-block: var(--section-y-sm); }
-  .section     { padding-block: var(--section-y); }
-  .section-lg  { padding-block: var(--section-y-lg); }
+  /* ── Section backgrounds — alternating depth ──────────────────────────────────
+     Use these on <section> elements in sequence:
+       Hero:         .bg-deep
+       Section 2:    .bg-base      ← primary
+       Section 3:    .bg-raised    ← lighter alternate
+       Section 4:    .bg-base
+       Section 5:    .bg-raised
+       ...alternating
+  ──────────────────────────────────────────────────────────────────────────── */
+  .bg-deep   { background-color: var(--bg-deep); }
+  .bg-base   { background-color: var(--bg-base); }
+  .bg-raised { background-color: var(--bg-raised); }
 
-  /* ── Section background alternation ─────────────── */
-  /* Even sections: #0A0A0A  /  Odd sections: #0D0D0D  */
-  .bg-page     { background-color: #0A0A0A; }
-  .bg-surface  { background-color: #0D0D0D; }
+  /* Legacy aliases */
+  .bg-page    { background-color: var(--bg-base); }
+  .bg-surface { background-color: var(--bg-raised); }
 
-  /* ── Eyebrow label ───────────────────────────────── */
+  /* ── Section separators ──────────────────────────────────────────────────────
+     Every section transition gets a hairline border to prevent blending.
+  ──────────────────────────────────────────────────────────────────────────── */
+  .section-sep {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .section-sep-accent {
+    position: relative;
+  }
+  .section-sep-accent::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border-accent-strong) 25%,
+      var(--border-accent-strong) 75%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  /* ── Eyebrow ── */
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -158,7 +223,6 @@
     text-transform: uppercase;
     color: var(--color-accent);
   }
-
   .eyebrow::before {
     content: "";
     display: block;
@@ -168,9 +232,7 @@
     flex-shrink: 0;
   }
 
-  /* ── Typography scale — standardized ────────────── */
-
-  /* Page hero headlines */
+  /* ── Typography ── */
   .display-xl {
     font-family: var(--font-display);
     font-size: clamp(3rem, 7vw, 6rem);
@@ -180,7 +242,6 @@
     color: var(--color-white);
   }
 
-  /* Section hero headlines */
   .display-lg {
     font-family: var(--font-display);
     font-size: clamp(2.25rem, 4.5vw, 4rem);
@@ -190,7 +251,6 @@
     color: var(--color-white);
   }
 
-  /* Section headings */
   .heading-xl {
     font-family: var(--font-display);
     font-size: clamp(1.875rem, 3.5vw, 3rem);
@@ -218,13 +278,12 @@
     color: var(--color-white);
   }
 
-  /* Keep headline-* aliases for backward compat */
+  /* Legacy aliases */
   .headline-xl { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 400; line-height: 1.0; letter-spacing: -0.04em; color: var(--color-white); }
   .headline-lg { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.035em; color: var(--color-white); }
   .headline-md { font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.025em; color: var(--color-white); }
   .headline-sm { font-family: var(--font-display); font-size: clamp(1.375rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: var(--color-white); }
 
-  /* Card headings — sans-serif */
   .card-title {
     font-family: var(--font-sans);
     font-size: 0.9375rem;
@@ -243,7 +302,6 @@
     line-height: 1.35;
   }
 
-  /* Body variants */
   .body-lg   { font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.75; color: var(--color-text-muted); }
   .body-base { font-size: 0.9375rem; line-height: 1.7;  color: var(--color-text-muted); }
   .body-sm   { font-size: 0.875rem;  line-height: 1.65; color: var(--color-text-dim); }
@@ -251,8 +309,7 @@
 
   .accent-text { font-style: italic; color: var(--color-accent); }
 
-  /* ── Buttons — standardized ──────────────────────── */
-
+  /* ── Buttons ── */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -260,7 +317,7 @@
     gap: 0.5rem;
     padding: 0.8125rem 1.75rem;
     background-color: var(--color-accent);
-    color: #0A0A0A;
+    color: #060606;
     font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 600;
@@ -278,7 +335,7 @@
 
   .btn-primary:hover:not(:disabled) {
     background-color: var(--color-accent-dim);
-    box-shadow: 0 0 24px rgba(32,160,32,0.28);
+    box-shadow: 0 0 0 1px rgba(32,160,32,0.4), 0 4px 20px rgba(32,160,32,0.25);
     transform: translateY(-1px);
   }
 
@@ -293,32 +350,32 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.8125rem 1.75rem;
-    background-color: transparent;
+    background-color: rgba(255,255,255,0.04);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.005em;
     border-radius: 7px;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--border-default);
     cursor: pointer;
     white-space: nowrap;
     user-select: none;
     transition:
       color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out),
       border-color var(--dur-fast) var(--ease-out),
       transform var(--dur-fast) var(--ease-out);
   }
 
   .btn-secondary:hover:not(:disabled) {
     color: var(--color-white);
-    border-color: var(--color-border-strong);
+    background-color: rgba(255,255,255,0.07);
+    border-color: var(--border-strong);
     transform: translateY(-1px);
   }
 
-  .btn-secondary:active:not(:disabled) {
-    transform: translateY(0);
-  }
+  .btn-secondary:active:not(:disabled) { transform: translateY(0); }
 
   .btn-ghost {
     display: inline-flex;
@@ -338,113 +395,109 @@
 
   .btn-ghost:hover { gap: 0.625rem; }
 
-  /* Large size modifier — applies to any btn-* */
   .btn-lg {
     padding: 1rem 2.25rem;
     font-size: 0.9375rem;
     border-radius: 8px;
   }
 
-  /* Small size modifier */
   .btn-sm {
     padding: 0.625rem 1.25rem;
     font-size: 0.8125rem;
     border-radius: 6px;
   }
 
-  /* ── Cards — standardized ────────────────────────── */
+  /* ── Cards ────────────────────────────────────────────────────────────────────
+     Cards must visually lift OFF their parent section.
+     Rule: if section = bg-base (#0B0B0B), card = #181818
+           if section = bg-raised (#111111), card = #1E1E1E
+     Both get a border + shadow for depth.
+  ──────────────────────────────────────────────────────────────────────────── */
 
-  /* Standard interactive card */
+  /* Standard card — sits on bg-base sections */
   .card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    padding: 1.75rem;
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
+    background-color: #181818;
+    border: 1px solid var(--border-default);
     border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-card);
     overflow: hidden;
     transition:
       border-color var(--dur-base) var(--ease-out),
-      transform var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out);
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .card:hover {
-    border-color: var(--color-accent-border);
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
 
-  /* Flat card — no hover lift */
-  .card-flat {
-    padding: 1.75rem;
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
+  /* Alt card — sits on bg-raised sections */
+  .card-alt {
+    position: relative;
+    background-color: #1E1E1E;
+    border: 1px solid var(--border-default);
     border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
-  /* Pricing card — larger padding */
-  .card-pricing {
-    padding: 2rem;
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
+  .card-alt:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
   }
 
-  /* Featured pricing card */
-  .card-pricing-featured {
-    padding: 2rem;
-    background-color: #131313;
+  /* Flat card — no hover */
+  .card-flat {
+    background-color: #181818;
+    border: 1px solid var(--border-default);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Featured pricing */
+  .card-featured {
+    background-color: #171717;
     border: 2px solid var(--color-accent);
     border-radius: 16px;
-    box-shadow: 0 0 60px rgba(32,160,32,0.09), 0 32px 80px rgba(0,0,0,0.45);
+    padding: 2rem;
+    box-shadow:
+      0 0 0 1px rgba(32,160,32,0.1),
+      0 0 48px rgba(32,160,32,0.08),
+      0 24px 64px rgba(0,0,0,0.5);
   }
 
-  /* ── Dividers ────────────────────────────────────── */
-
+  /* ── Dividers ── */
   .divider {
     width: 100%;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
+    background: linear-gradient(to right, transparent, var(--border-default) 20%, var(--border-default) 80%, transparent);
   }
 
   .divider-accent {
     width: 100%;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--color-accent-border) 30%, var(--color-accent-border) 70%, transparent);
+    background: linear-gradient(to right, transparent, var(--border-accent-strong) 30%, var(--border-accent-strong) 70%, transparent);
   }
 
-  /* ── Section dividers ────────────────────────────── */
-
-  .section-border-top {
-    border-top: 1px solid var(--color-border);
-  }
-
-  .section-accent-top {
-    position: relative;
-  }
-
-  .section-accent-top::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--color-accent-border) 30%, var(--color-accent-border) 70%, transparent);
-  }
-
-  /* ── Badge / pill ────────────────────────────────── */
-
+  /* ── Badge ── */
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
     padding: 0.3125rem 0.75rem;
-    background-color: rgba(255,255,255,0.04);
-    border: 1px solid var(--color-border);
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-default);
     border-radius: 99px;
     font-size: 0.75rem;
     font-weight: 500;
@@ -454,12 +507,11 @@
 
   .badge-accent {
     background-color: rgba(32,160,32,0.08);
-    border-color: var(--color-accent-border);
+    border-color: var(--border-accent);
     color: var(--color-accent);
   }
 
-  /* ── Stats ───────────────────────────────────────── */
-
+  /* ── Stats ── */
   .stat-value {
     font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3.25rem);
@@ -477,13 +529,12 @@
     color: var(--color-text-dim);
   }
 
-  /* ── Form inputs — standardized ──────────────────── */
-
+  /* ── Form inputs ── */
   .input {
     width: 100%;
     padding: 0.8125rem 1.125rem;
-    background-color: rgba(255,255,255,0.04);
-    border: 1px solid var(--color-border);
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     font-family: var(--font-sans);
     font-size: 0.9375rem;
@@ -498,31 +549,29 @@
   .input::placeholder { color: var(--color-text-xdim); }
 
   .input:hover:not(:focus) {
-    border-color: var(--color-border-strong);
+    border-color: var(--border-strong);
   }
 
   .input:focus {
-    border-color: var(--color-accent-border);
+    border-color: var(--border-accent-strong);
     background-color: rgba(32,160,32,0.03);
-    box-shadow: 0 0 0 3px rgba(32,160,32,0.07);
+    box-shadow: 0 0 0 3px rgba(32,160,32,0.08);
   }
 
-  /* ── Backgrounds ─────────────────────────────────── */
-
+  /* ── Backgrounds ── */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 52px 52px;
   }
 
   .bg-dots {
-    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
-  /* ── Nav ─────────────────────────────────────────── */
-
+  /* ── Nav ── */
   .nav-link {
     position: relative;
     font-size: 0.875rem;
@@ -534,13 +583,12 @@
   .nav-link:hover  { color: var(--color-white); }
   .nav-link-active { color: var(--color-white); }
 
-  /* ── Prose ───────────────────────────────────────── */
-
+  /* ── Prose ── */
   .prose-onyx { color: var(--color-text-muted); line-height: 1.75; }
   .prose-onyx h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-white); margin-top: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.025em; }
   .prose-onyx p  { margin-bottom: 1.25rem; }
   .prose-onyx strong { color: var(--color-text); font-weight: 600; }
-  .prose-onyx a  { color: var(--color-accent); border-bottom: 1px solid var(--color-accent-border); }
+  .prose-onyx a  { color: var(--color-accent); border-bottom: 1px solid var(--border-accent); }
   .prose-onyx a:hover { border-color: var(--color-accent); }
 }
 
@@ -557,19 +605,18 @@
   }
 
   .text-gradient-white {
-    background: linear-gradient(160deg, #fff 0%, rgba(255,255,255,0.55) 100%);
+    background: linear-gradient(160deg, #fff 0%, rgba(255,255,255,0.5) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-balance  { text-wrap: balance; }
-  .text-pretty   { text-wrap: pretty; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
 
   .glow-accent    { box-shadow: 0 0 24px rgba(32,160,32,0.22); }
   .glow-accent-lg { box-shadow: 0 0 48px rgba(32,160,32,0.28), 0 0 96px rgba(32,160,32,0.1); }
 
-  /* Stagger delays */
   .delay-0   { animation-delay: 0ms; }
   .delay-75  { animation-delay: 75ms; }
   .delay-150 { animation-delay: 150ms; }
@@ -579,6 +626,5 @@
 
   .fill-both    { animation-fill-mode: both; }
   .fill-forward { animation-fill-mode: forwards; }
-
   .gpu { transform: translateZ(0); backface-visibility: hidden; }
 }
