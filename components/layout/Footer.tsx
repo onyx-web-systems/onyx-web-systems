@@ -51,7 +51,7 @@ export const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#0A0A0A] border-t border-white/[0.06] overflow-hidden">
+    <footer className="relative overflow-hidden" style={{ backgroundColor: "#000000", borderTop: "1px solid rgba(255,255,255,0.09)" }}>
 
       {/* Subtle top accent gradient */}
       <div
@@ -146,7 +146,7 @@ export const Footer = () => {
       </div>
 
       {/* ── Bottom bar ──────────────────────────────────── */}
-      <div className="border-t border-white/[0.04]">
+      <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
 
           <p className="text-xs text-[#3D3D3D] tracking-wide">
