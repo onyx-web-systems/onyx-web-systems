@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { PageLayout } from "@/components/layout/PageLayout";
+
 import { cn } from "@/lib/utils";
 import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
@@ -64,7 +64,7 @@ export default function AuditPage() {
   };
 
   return (
-    <PageLayout>
+    <div className="pt-[72px]">
 
       {/* ── Section 1: Hero ── */}
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-base pt-16 pb-20">
@@ -357,7 +357,7 @@ export default function AuditPage() {
         </div>
       </section>
 
-    </PageLayout>
+    </div>
   );
 }
 
