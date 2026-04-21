@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { LinkButton } from "@/components/ui/Button";
-import { PageLayout, PageHero } from "@/components/layout/PageLayout";
+import { PageHero } from "@/components/layout/PageLayout";
 import { cn } from "@/lib/utils";
 import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
@@ -109,7 +109,7 @@ const FLOW = [
 
 export default function ServicesPage() {
   return (
-    <PageLayout>
+    <div className="pt-[72px]">
 
       {/* ── Section 1: Hero ── */}
       <PageHero
@@ -392,6 +392,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-    </PageLayout>
+    </div>
   );
 }
