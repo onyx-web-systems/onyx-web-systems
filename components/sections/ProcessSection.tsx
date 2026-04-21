@@ -13,7 +13,7 @@ const STEPS = [
 ];
 
 export const ProcessSection = () => (
-  <section id="process" className="relative section bg-surface overflow-hidden">
+  <section id="process" className="relative section bg-raised section-sep overflow-hidden">
     <div className="absolute top-0 inset-x-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
       aria-hidden="true" />
@@ -53,7 +53,7 @@ export const ProcessSection = () => (
               {/* Mobile: side-by-side  / Desktop: stacked */}
               <div className="flex lg:flex-col items-center lg:items-start gap-4">
                 <div className={cn(
-                  "flex items-center justify-center w-11 h-11 rounded-full border-2 flex-shrink-0 bg-[#0A0A0A]",
+                  "flex items-center justify-center w-11 h-11 rounded-full border-2 flex-shrink-0 bg-[#111111]",
                   "transition-all duration-300 group-hover:border-[#20A020]"
                 )}
                   style={{ borderColor: "rgba(255,255,255,0.1)" }}>
