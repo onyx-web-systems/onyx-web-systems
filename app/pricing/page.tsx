@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LinkButton } from "@/components/ui/Button";
-import { PageLayout, PageHero } from "@/components/layout/PageLayout";
+import { PageHero } from "@/components/layout/PageLayout";
 import { cn } from "@/lib/utils";
 import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
@@ -107,7 +107,7 @@ const FAQS = [
 
 export default function PricingPage() {
   return (
-    <PageLayout>
+    <div className="pt-[72px]">
 
       {/* ── Section 1: Hero ── */}
       <PageHero
@@ -410,7 +410,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-    </PageLayout>
+    </div>
   );
 }
 
