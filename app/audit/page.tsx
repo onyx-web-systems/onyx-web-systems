@@ -1,309 +1,204 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { LinkButton } from "@/components/ui/Button";
-import { PageLayout, PageHero } from "@/components/layout/PageLayout";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { PageLayout } from "@/components/layout/PageLayout";
 import { cn } from "@/lib/utils";
 import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
-/* ─── Pricing Tiers ──────────────────────────────────────────────────────────── */
+/* ─── What We Review ─────────────────────────────────────────────────────────── */
 
-const TIERS = [
+const REVIEW_ITEMS = [
   {
-    name: "Foundation System",
-    price: "Starting at $5,000",
-    priceNote: "One-time project investment",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.25" />
+        <path d="M6 8h8M6 11h5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+    title: "Site Structure",
     description:
-      "A sharp, high-performance website built for credibility, clarity, and conversion readiness.",
-    features: [
-      "Custom 5–8 page design",
-      "Mobile-first development",
-      "Conversion-optimized structure",
-      "Contact + lead capture forms",
-      "Core Web Vitals optimization",
-      "Basic SEO infrastructure",
-      "30-day post-launch support",
-    ],
-    featured: false,
-    cta: "Start a Conversation",
+      "We review your page hierarchy, navigation logic, and information architecture to identify where visitors lose clarity or drop off.",
   },
   {
-    name: "Growth System",
-    price: "$8,000–$12,000",
-    priceNote: "Scope-dependent investment",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M4 16L8 10l3.5 3L15 6l3 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="17" cy="5" r="1.5" fill="currentColor" />
+      </svg>
+    ),
+    title: "Conversion Flow",
     description:
-      "Our most balanced system for businesses that need design, performance, lead flow, and automation.",
-    features: [
-      "Everything in Foundation",
-      "CRM + pipeline integration",
-      "Automated email sequences",
-      "AI chat + lead qualification",
-      "Analytics + conversion tracking",
-      "Landing page (up to 2)",
-      "60-day post-launch support",
-    ],
-    featured: true,
-    cta: "Get Started",
+      "We audit your calls to action, offer clarity, and path to conversion — flagging every point where a visitor could convert but doesn't.",
   },
   {
-    name: "Authority System",
-    price: "Starting at $12,000",
-    priceNote: "Custom scoped per project",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.25" />
+        <path d="M10 6v4l3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+    title: "Performance Issues",
     description:
-      "A complete digital growth system for brands ready to scale with authority.",
-    features: [
-      "Everything in Growth",
-      "Full funnel architecture",
-      "Multi-channel automation",
-      "AI-powered engagement layer",
-      "Custom integrations",
-      "Monthly strategy reviews",
-      "Priority support + refinement",
-    ],
-    featured: false,
-    cta: "Start a Conversation",
-  },
-];
-
-/* ─── Fit Guidance ───────────────────────────────────────────────────────────── */
-
-const FIT_CARDS = [
-  {
-    system: "Foundation System",
-    best: "You're establishing or refreshing your web presence and need a site that looks serious, loads fast, and converts visitors — without overcomplicating the scope.",
-    signals: ["New business or rebrand", "Outdated or template-based site", "Need credibility fast"],
+      "Load speed, Core Web Vitals, image optimization, and mobile rendering are assessed against industry benchmarks for conversion-critical performance.",
   },
   {
-    system: "Growth System",
-    best: "You're generating traffic but not converting it. You need a connected system — design, automation, and lead flow — working together as one engine.",
-    signals: ["Traffic without conversions", "Manual follow-up process", "Ready to automate leads"],
-  },
-  {
-    system: "Authority System",
-    best: "You're scaling and need infrastructure that supports it. Complex offers, multiple products, or multi-channel lead flow require a fully engineered growth system.",
-    signals: ["High-ticket or complex offer", "Multiple revenue streams", "Requires custom integrations"],
-  },
-];
-
-/* ─── FAQs ───────────────────────────────────────────────────────────────────── */
-
-const FAQS = [
-  {
-    q: "Do you offer custom scopes?",
-    a: "Yes. Every project is scoped individually based on your goals, complexity, and timeline. The pricing tiers above are starting points — we'll build a precise proposal after a discovery call.",
-  },
-  {
-    q: "Do you work with businesses outside my city?",
-    a: "Entirely remote and fully global. We work with clients across North America, Europe, and beyond. Our process is built for async collaboration without any drop in quality or communication.",
-  },
-  {
-    q: "Can you improve an existing site?",
-    a: "Absolutely. If your current site has strong bones but underperforms, we can audit, restructure, and rebuild specific sections — or take on a full redesign depending on the gap.",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M4 10h3l2-6 3 12 2-6h2" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    title: "Missed Lead Opportunities",
+    description:
+      "We identify gaps in your lead capture — missing forms, no follow-up triggers, weak offer positioning — and quantify what they're likely costing you.",
   },
 ];
 
 /* ─── Page ───────────────────────────────────────────────────────────────────── */
 
-export default function PricingPage() {
+export default function AuditPage() {
+  const formRef = useRef<HTMLElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <PageLayout>
 
       {/* ── Section 1: Hero ── */}
-      <PageHero
-        eyebrow="Pricing"
-        headline="Investment in Performance"
-        sub="We build websites as business infrastructure. Pricing reflects strategy, execution, and performance."
-        align="center"
-      />
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-base pt-16 pb-20">
 
-      {/* ── Section 2: Pricing Cards ── */}
-      <section className="relative section bg-base section-sep overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px]"
+            style={{ background: "radial-gradient(ellipse at center, rgba(32,160,32,0.06) 0%, transparent 70%)" }} />
+          <div className="absolute inset-0 opacity-[0.02]"
+            style={{
+              backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+              backgroundSize: "56px 56px",
+            }} />
+          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+          <div className="absolute top-0 inset-x-0 h-px"
+            style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.35), transparent)" }} />
+        </div>
+
+        <div className="container-site relative z-10">
+          <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-8">
+
+            <motion.p
+              className="eyebrow"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Free Website Audit
+            </motion.p>
+
+            <motion.h1
+              className="font-display text-white text-balance"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.04em", lineHeight: "1.0" }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            >
+              Get a Free Website Performance Audit
+            </motion.h1>
+
+            <motion.p
+              className="text-[#9A9A9A] text-balance"
+              style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)", lineHeight: "1.75", maxWidth: "520px" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            >
+              Find out what is slowing your site down, weakening your conversions,
+              and costing you leads.
+            </motion.p>
+
+            <motion.button
+              onClick={scrollToForm}
+              className="btn-primary btn-lg group"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+              type="button"
+            >
+              Request My Free Audit
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                className="transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true">
+                <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.button>
+
+            {/* Trust row */}
+            <motion.div
+              className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              {["No credit card required", "Delivered within 48 hours", "No sales pressure"].map((t) => (
+                <span key={t} className="flex items-center gap-1.5 text-xs text-[#6B6B6B] font-medium">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <circle cx="6" cy="6" r="6" fill="#20A020" fillOpacity="0.15" />
+                    <path d="M3.5 6L5.2 7.8L8.5 4.5" stroke="#20A020" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {t}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 2: What We Review ── */}
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
           aria-hidden="true" />
 
-        {/* Subtle center glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.04]"
-          style={{ backgroundColor: "#20A020" }} aria-hidden="true" />
-
         <div className="container-site">
-
-          {/* Positioning note */}
           <motion.div
-            className="flex justify-center mb-14"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportConfig}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center gap-3 px-5 py-3 rounded-full border"
-              style={{ borderColor: "rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.02)" }}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <circle cx="7" cy="7" r="6" stroke="#20A020" strokeWidth="1.25" />
-                <path d="M7 4.5v3l2 2" stroke="#20A020" strokeWidth="1.25" strokeLinecap="round" />
-              </svg>
-              <span className="text-xs text-[#9A9A9A] font-medium">
-                All projects are custom-scoped. These are starting investment ranges.
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Cards */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start"
-            variants={staggerContainer(0.1, 0.1)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-          >
-            {TIERS.map((tier) => (
-              <motion.div
-                key={tier.name}
-                variants={staggerItem}
-                className={cn(
-                  "relative flex flex-col gap-7 p-8 rounded-2xl",
-                  "transition-all duration-300",
-                  tier.featured
-                    ? "border-2 -translate-y-3 md:-translate-y-4"
-                    : "border border-white/[0.06] hover:border-white/[0.12]"
-                )}
-                style={tier.featured ? {
-                  backgroundColor: "#171717",
-                  borderColor: "#20A020",
-                  boxShadow: "0 0 60px rgba(32,160,32,0.1), 0 32px 80px rgba(0,0,0,0.5)",
-                } : {
-                  backgroundColor: "#1E1E1E",
-                }}
-              >
-                {/* Featured badge */}
-                {tier.featured && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="text-[10px] font-bold tracking-[0.12em] uppercase px-4 py-1.5 rounded-full whitespace-nowrap"
-                      style={{ backgroundColor: "#20A020", color: "#0A0A0A" }}>
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-
-                {/* Tier name + price */}
-                <div className="flex flex-col gap-3 pb-6 border-b"
-                  style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em]"
-                    style={{ color: tier.featured ? "#20A020" : "#6B6B6B" }}>
-                    {tier.name}
-                  </span>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-display text-white font-normal"
-                      style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", letterSpacing: "-0.03em" }}>
-                      {tier.price}
-                    </span>
-                    <span className="text-xs text-[#6B6B6B]">{tier.priceNote}</span>
-                  </div>
-                  <p className="text-sm text-[#9A9A9A] leading-relaxed mt-1">
-                    {tier.description}
-                  </p>
-                </div>
-
-                {/* Features */}
-                <ul className="flex flex-col gap-3 flex-1">
-                  {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-sm text-[#9A9A9A]">
-                      <svg className="flex-shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                        <circle cx="7.5" cy="7.5" r="7.5"
-                          fill={tier.featured ? "rgba(32,160,32,0.18)" : "rgba(32,160,32,0.1)"} />
-                        <path d="M4.5 7.5L6.5 9.5L10.5 5.5" stroke="#20A020"
-                          strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <LinkButton
-                  href="/contact"
-                  variant={tier.featured ? "primary" : "secondary"}
-                  className="w-full justify-center mt-2"
-                >
-                  {tier.cta}
-                </LinkButton>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Custom scope note */}
-          <motion.p
-            className="text-center text-xs text-[#3D3D3D] mt-10 font-medium"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportConfig}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            All pricing is in USD. Retainer and maintenance plans available upon request.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* ── Section 3: Fit Guidance ── */}
-      <section className="relative section bg-raised section-sep overflow-hidden">
-
-        <div className="absolute top-0 inset-x-0 h-px"
-          style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.15), transparent)" }}
-          aria-hidden="true" />
-
-        <div className="container-site">
-
-          <motion.div
-            className="flex flex-col gap-4 mb-14 max-w-xl"
+            className="flex flex-col gap-4 mb-12 max-w-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportConfig}
             transition={{ duration: 0.7 }}
           >
-            <p className="eyebrow">Find Your Fit</p>
+            <p className="eyebrow">The Audit Covers</p>
             <h2 className="font-display text-white"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.03em", lineHeight: "1.1" }}>
-              Which System Is Right for You?
+              What We'll Review
             </h2>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
             variants={staggerContainer(0.1, 0.1)}
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig}
           >
-            {FIT_CARDS.map((card) => (
+            {REVIEW_ITEMS.map((item) => (
               <motion.div
-                key={card.system}
+                key={item.title}
                 variants={staggerItem}
                 className={cn(
-                  "flex flex-col gap-5 p-7 rounded-2xl",
-                  "border bg-[#1E1E1E] shadow-[0_1px_3px_rgba(0,0,0,0.4),0_4px_12px_rgba(0,0,0,0.25)]",
-                  "hover:border-[rgba(32,160,32,0.15)] transition-all duration-300"
+                  "group flex flex-col gap-4 p-6 rounded-xl",
+                  "border bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)]",
+                  "hover:border-[rgba(32,160,32,0.2)] hover:-translate-y-0.5",
+                  "transition-all duration-300"
                 )}
               >
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#20A020" }}>
-                    {card.system}
-                  </span>
-                  <div className="w-8 h-px mt-1" style={{ backgroundColor: "rgba(32,160,32,0.3)" }} />
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg text-[#6B6B6B] group-hover:text-[#20A020] transition-colors duration-300 flex-shrink-0"
+                  style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  {item.icon}
                 </div>
-
-                <p className="text-sm text-[#9A9A9A] leading-relaxed flex-1">
-                  {card.best}
-                </p>
-
-                <div className="flex flex-col gap-2 pt-4 border-t border-white/[0.05]">
-                  {card.signals.map((s) => (
-                    <span key={s} className="flex items-center gap-2 text-xs text-[#6B6B6B]">
-                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "#20A020" }} />
-                      {s}
-                    </span>
-                  ))}
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-white font-semibold text-sm">{item.title}</h3>
+                  <p className="text-[#6B6B6B] text-xs leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -311,7 +206,53 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── Section 4: FAQ Teaser ── */}
+      {/* ── Section 3: Form ── */}
+      <section
+        ref={formRef}
+        id="audit-form"
+        className="relative section bg-base section-sep overflow-hidden"
+      >
+        <div className="absolute top-0 inset-x-0 h-px"
+          style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.2), transparent)" }}
+          aria-hidden="true" />
+
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.04]"
+          style={{ backgroundColor: "#20A020" }} aria-hidden="true" />
+
+        <div className="container-site">
+          <div className="max-w-2xl mx-auto">
+
+            <motion.div
+              className="flex flex-col gap-4 mb-10 text-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+              transition={{ duration: 0.7 }}
+            >
+              <p className="eyebrow">Get Started</p>
+              <h2 className="font-display text-white"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.03em", lineHeight: "1.1" }}>
+                Submit Your Website
+              </h2>
+              <p className="text-[#6B6B6B] text-sm" style={{ maxWidth: "400px", lineHeight: "1.7" }}>
+                Fill in the details below and we'll get back to you within 48 hours
+                with a clear, actionable review.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewportConfig}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              <AuditForm />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: Why This Matters ── */}
       <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
@@ -319,39 +260,59 @@ export default function PricingPage() {
           aria-hidden="true" />
 
         <div className="container-site">
-          <div className="max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
             <motion.div
-              className="flex flex-col gap-4 mb-12 text-center items-center"
-              initial={{ opacity: 0, y: 20 }}
+              className="lg:col-span-5 flex flex-col gap-6"
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportConfig}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7 }}
             >
-              <p className="eyebrow">FAQ</p>
-              <h2 className="font-display text-white"
-                style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", letterSpacing: "-0.025em" }}>
-                Common Questions
+              <p className="eyebrow">Why It Matters</p>
+              <h2 className="font-display text-white text-balance"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", letterSpacing: "-0.03em", lineHeight: "1.1" }}>
+                Most Businesses Don't Need More Traffic First.
               </h2>
+              <p className="text-[#6B6B6B] leading-relaxed" style={{ fontSize: "0.9375rem" }}>
+                They need a site that converts the traffic they already have.
+              </p>
+              <div className="w-10 h-px" style={{ backgroundColor: "#20A020" }} />
             </motion.div>
 
+            {/* Stat cards */}
             <motion.div
-              className="flex flex-col gap-3"
-              variants={staggerContainer(0.1, 0.1)}
+              className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
+              variants={staggerContainer(0.1, 0.15)}
               initial="hidden"
               whileInView="visible"
               viewport={viewportConfig}
             >
-              {FAQS.map((faq) => (
-                <FAQItem key={faq.q} question={faq.q} answer={faq.a} />
+              {[
+                { stat: "96%", label: "of visitors leave without converting on a poorly structured site" },
+                { stat: "3s",  label: "is all it takes for a slow site to lose more than half its visitors" },
+                { stat: "2×",  label: "more leads on average after a conversion-focused rebuild" },
+              ].map((item) => (
+                <motion.div
+                  key={item.stat}
+                  variants={staggerItem}
+                  className="flex flex-col gap-3 p-6 rounded-xl border bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)]"
+                >
+                  <span className="font-display text-white font-normal"
+                    style={{ fontSize: "2.5rem", letterSpacing: "-0.04em", lineHeight: "1" }}
+                    aria-label={item.stat}>
+                    {item.stat}
+                  </span>
+                  <p className="text-[#6B6B6B] text-xs leading-relaxed">{item.label}</p>
+                </motion.div>
               ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── Section 5: CTA ── */}
-      <section className="relative section bg-deep section-sep-accent overflow-hidden"}>
+      {/* ── Section 5: Final CTA Reinforcement ── */}
+      <section className="relative section bg-base section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.25), transparent)" }}
@@ -362,50 +323,36 @@ export default function PricingPage() {
           aria-hidden="true" />
 
         <div className="container-site">
-          <div className="max-w-2xl mx-auto flex flex-col items-center text-center gap-8">
+          <div className="max-w-xl mx-auto flex flex-col items-center text-center gap-7">
 
             <motion.div
               className="flex flex-col items-center gap-5"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportConfig}
               transition={{ duration: 0.7 }}
             >
-              <p className="eyebrow">Let's Talk</p>
+              <p className="eyebrow">Take the First Step</p>
               <h2 className="font-display text-white text-balance"
-                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.035em", lineHeight: "1.08" }}>
-                Not Sure Which System Fits?
+                style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", letterSpacing: "-0.035em", lineHeight: "1.08" }}>
+                Get Clear on What to Fix First.
               </h2>
-              <p className="text-[#6B6B6B]"
-                style={{ fontSize: "1rem", lineHeight: "1.75", maxWidth: "400px" }}>
-                Start with a free audit and get clear on the right next step.
+              <p className="text-[#6B6B6B] text-sm leading-relaxed" style={{ maxWidth: "380px" }}>
+                A sharper strategy starts with a clearer diagnosis.
               </p>
             </motion.div>
 
-            <motion.div
+            <motion.button
+              onClick={scrollToForm}
+              className="btn-primary btn-lg"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportConfig}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-center gap-4"
+              type="button"
             >
-              <LinkButton href="/audit" variant="primary" size="lg">
-                Get Your Free Website Audit
-              </LinkButton>
-              <LinkButton href="/contact" variant="secondary" size="lg">
-                Talk to Us First
-              </LinkButton>
-            </motion.div>
-
-            <motion.p
-              className="text-xs text-[#3D3D3D] font-medium"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={viewportConfig}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              Free. No commitment. Delivered within 48 hours.
-            </motion.p>
+              Request My Free Audit
+            </motion.button>
           </div>
         </div>
       </section>
@@ -414,54 +361,233 @@ export default function PricingPage() {
   );
 }
 
-/* ─── FAQ Accordion Item ─────────────────────────────────────────────────────── */
+/* ─── Audit Form ─────────────────────────────────────────────────────────────── */
+/*
+ * Form is structured for easy backend integration.
+ *
+ * TO CONNECT AN EMAIL SERVICE:
+ *
+ * Option A — Resend (recommended):
+ *   1. Install: npm install resend
+ *   2. Create app/api/audit/route.ts
+ *   3. POST to /api/audit with formData
+ *
+ * Option B — Formspree:
+ *   1. Replace action="" with your Formspree endpoint
+ *   2. Add method="POST" to the form element
+ *
+ * Option C — Any other provider:
+ *   The handleSubmit function below is the integration point.
+ *   Replace the console.log with your API call.
+ */
 
-const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
-  const [open, setOpen] = useState(false);
+type FormState = "idle" | "submitting" | "success" | "error";
 
-  return (
-    <motion.div
-      variants={staggerItem}
-      className={cn(
-        "rounded-xl border overflow-hidden transition-all duration-300",
-        open
-          ? "border-[rgba(32,160,32,0.2)] bg-[#111111]"
-          : "border-white/[0.06] bg-[#111111] hover:border-white/[0.1]"
-      )}
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
-        aria-expanded={open}
-      >
-        <span className="text-sm font-medium text-white leading-snug">{question}</span>
-        <div className={cn(
-          "flex items-center justify-center w-6 h-6 rounded-full border flex-shrink-0 transition-all duration-300",
-          open
-            ? "border-[#20A020] bg-[rgba(32,160,32,0.1)] rotate-45"
-            : "border-white/[0.12]"
-        )}>
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <path d="M5 2V8M2 5H8" stroke={open ? "#20A020" : "#9A9A9A"} strokeWidth="1.25" strokeLinecap="round" />
+const AuditForm = () => {
+  const [state, setState] = useState<FormState>("idle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    businessName: "",
+    websiteUrl: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setState("submitting");
+
+    try {
+      /*
+       * ── INTEGRATION POINT ──────────────────────────────────────
+       * Replace this block with your email service API call.
+       *
+       * Example with Resend:
+       * const res = await fetch("/api/audit", {
+       *   method: "POST",
+       *   headers: { "Content-Type": "application/json" },
+       *   body: JSON.stringify(formData),
+       * });
+       * if (!res.ok) throw new Error("Failed");
+       * ────────────────────────────────────────────────────────────
+       */
+      await new Promise((res) => setTimeout(res, 1200)); // ← remove when wired
+      setState("success");
+    } catch {
+      setState("error");
+    }
+  };
+
+  if (state === "success") {
+    return (
+      <div className="flex flex-col items-center text-center gap-5 py-16 px-8 rounded-2xl border"
+        style={{ borderColor: "rgba(32,160,32,0.2)", backgroundColor: "rgba(32,160,32,0.04)" }}>
+        <div className="flex items-center justify-center w-14 h-14 rounded-full"
+          style={{ backgroundColor: "rgba(32,160,32,0.12)", border: "1px solid rgba(32,160,32,0.25)" }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12L9.5 16.5L19 7" stroke="#20A020" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
+        <div className="flex flex-col gap-2">
+          <h3 className="font-display text-white text-xl" style={{ letterSpacing: "-0.02em" }}>
+            Audit Request Received
+          </h3>
+          <p className="text-[#6B6B6B] text-sm leading-relaxed" style={{ maxWidth: "320px" }}>
+            We'll review your site and send a detailed audit within 48 hours.
+            Check your inbox at <span className="text-[#9A9A9A]">{formData.email}</span>.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-5 p-8 rounded-2xl border"
+      style={{ borderColor: "rgba(255,255,255,0.08)", backgroundColor: "#111111" }}
+      noValidate
+    >
+      {/* Row 1: Name + Email */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField
+          label="Your Name"
+          name="name"
+          type="text"
+          placeholder="Jane Smith"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <FormField
+          label="Email Address"
+          name="email"
+          type="email"
+          placeholder="jane@company.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Row 2: Business + URL */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField
+          label="Business Name"
+          name="businessName"
+          type="text"
+          placeholder="Acme Inc."
+          value={formData.businessName}
+          onChange={handleChange}
+          required
+        />
+        <FormField
+          label="Website URL"
+          name="websiteUrl"
+          type="url"
+          placeholder="https://yoursite.com"
+          value={formData.websiteUrl}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Message */}
+      <div className="flex flex-col gap-2">
+        <label className="text-xs font-semibold text-[#9A9A9A] uppercase tracking-wider">
+          Anything specific you'd like us to focus on?{" "}
+          <span className="text-[#3D3D3D] normal-case tracking-normal font-normal">Optional</span>
+        </label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="e.g. Our bounce rate is high, or we're getting traffic but no enquiries..."
+          rows={4}
+          className="input resize-none"
+          style={{ lineHeight: "1.6" }}
+        />
+      </div>
+
+      {/* Error message */}
+      {state === "error" && (
+        <p className="text-sm text-[#9A9A9A] text-center">
+          Something went wrong. Please try again or email us directly at{" "}
+          <a href="mailto:hello@onyxwebsystems.com" className="text-[#20A020]">
+            hello@onyxwebsystems.com
+          </a>
+        </p>
+      )}
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={state === "submitting"}
+        className={cn(
+          "btn-primary btn-lg w-full justify-center mt-2",
+          state === "submitting" && "opacity-70 cursor-not-allowed pointer-events-none"
+        )}
+      >
+        {state === "submitting" ? (
+          <>
+            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            Submitting…
+          </>
+        ) : (
+          "Request My Free Audit"
+        )}
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="px-6 pb-5 text-sm text-[#6B6B6B] leading-relaxed border-t border-white/[0.05] pt-4">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <p className="text-center text-xs text-[#3D3D3D]">
+        No commitment. No credit card. We'll respond within 48 hours.
+      </p>
+    </form>
   );
 };
+
+/* ─── Form Field ─────────────────────────────────────────────────────────────── */
+
+const FormField = ({
+  label,
+  name,
+  type,
+  placeholder,
+  value,
+  onChange,
+  required,
+}: {
+  label: string;
+  name: string;
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+}) => (
+  <div className="flex flex-col gap-2">
+    <label htmlFor={name} className="text-xs font-semibold text-[#9A9A9A] uppercase tracking-wider">
+      {label}
+      {required && <span className="text-[#20A020] ml-1">*</span>}
+    </label>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      required={required}
+      className="input"
+      autoComplete={name === "email" ? "email" : name === "name" ? "name" : "off"}
+    />
+  </div>
+);
