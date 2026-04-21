@@ -5,7 +5,7 @@ import { LinkButton } from "@/components/ui/Button";
 import { viewportConfig } from "@/lib/motion";
 
 export const FinalCTASection = () => (
-  <section className="relative section bg-page overflow-hidden">
+  <section className="relative section bg-deep section-sep-accent overflow-hidden">
     <div className="absolute top-0 inset-x-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.3), transparent)" }}
       aria-hidden="true" />
