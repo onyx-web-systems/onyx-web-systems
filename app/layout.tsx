@@ -1,4 +1,3 @@
-
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
@@ -6,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 
-/* ─── Font Definitions ───────────────────────────────────────────────────────── */
+/* ─── Fonts ──────────────────────────────────────────────────────────────────── */
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -34,79 +33,112 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false,
 });
 
-/* ─── Site Metadata ──────────────────────────────────────────────────────────── */
+/* ─── Site-wide Metadata ─────────────────────────────────────────────────────── */
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://onyxwebsystems.com"),
+
   title: {
-    default: "Onyx Web Systems — High-Performance Websites Built to Convert",
+    default: "Onyx Web Systems | High-Performance Websites Built to Convert",
     template: "%s | Onyx Web Systems",
   },
+
   description:
-    "Onyx Web Systems builds high-performance websites engineered to attract, convert, and automate client acquisition. Not a website. A revenue system.",
+    "Onyx Web Systems builds high-performance websites engineered to attract, convert, and automate client acquisition for serious businesses.",
+
   keywords: [
     "web design agency",
     "high performance websites",
-    "conversion optimization",
-    "Next.js development",
-    "premium web development",
+    "conversion rate optimization",
+    "Next.js web development",
+    "premium web design",
     "website that converts",
     "revenue system",
+    "CRM integration",
+    "AI chatbot website",
     "Onyx Web Systems",
   ],
-  authors: [{ name: "Onyx Web Systems", url: "https://onyxwebsystems.com" }],
-  creator: "Onyx Web Systems",
+
+  authors:   [{ name: "Onyx Web Systems", url: "https://onyxwebsystems.com" }],
+  creator:   "Onyx Web Systems",
   publisher: "Onyx Web Systems",
+
+  /* ── Open Graph ── */
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://onyxwebsystems.com",
-    siteName: "Onyx Web Systems",
-    title: "Onyx Web Systems — High-Performance Websites Built to Convert",
+    type:      "website",
+    locale:    "en_US",
+    url:       "https://onyxwebsystems.com",
+    siteName:  "Onyx Web Systems",
+    title:     "Onyx Web Systems | High-Performance Websites Built to Convert",
     description:
       "Not a website. A revenue system. We build high-performance digital infrastructure for serious businesses.",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
+        url:    "/og-image.jpg",
+        width:  1200,
         height: 630,
-        alt: "Onyx Web Systems",
+        alt:    "Onyx Web Systems — High-Performance Websites Built to Convert",
       },
     ],
   },
+
+  /* ── Twitter / X ── */
   twitter: {
-    card: "summary_large_image",
-    title: "Onyx Web Systems — Built to Convert. Engineered to Scale.",
-    description:
-      "High-performance websites that attract, convert, and automate client acquisition.",
-    images: ["/og-image.jpg"],
+    card:        "summary_large_image",
+    site:        "@onyxwebsystems",
+    creator:     "@onyxwebsystems",
+    title:       "Onyx Web Systems | High-Performance Websites Built to Convert",
+    description: "High-performance websites that attract, convert, and automate client acquisition.",
+    images:      ["/og-image.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+
+  /* ── Icons ── */
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico",  sizes: "any" },
+      { url: "/favicon.svg",  type: "image/svg+xml" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple:   "/apple-touch-icon.png",
+    other: [
+      { rel: "icon", url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { rel: "icon", url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
   },
+
+  /* ── Manifest ── */
   manifest: "/site.webmanifest",
+
+  /* ── Robots ── */
+  robots: {
+    index:  true,
+    follow: true,
+    googleBot: {
+      index:              true,
+      follow:             true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet":       -1,
+    },
+  },
+
+  /* ── Canonical ── */
+  alternates: {
+    canonical: "https://onyxwebsystems.com",
+  },
+
+  /* ── Verification placeholders ── */
+  // Uncomment and fill when you have these accounts:
+  // verification: {
+  //   google: "YOUR_GOOGLE_SITE_VERIFICATION",
+  //   yandex: "YOUR_YANDEX_VERIFICATION",
+  // },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0A0A",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
+  themeColor:    "#0A0A0A",
+  width:         "device-width",
+  initialScale:  1,
+  maximumScale:  5,
 };
 
 /* ─── Root Layout ────────────────────────────────────────────────────────────── */
@@ -126,25 +158,12 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body className="bg-onyx-950 text-onyx-200 font-sans antialiased">
-        {/* Background Texture Layer */}
-        <div
-          className="fixed inset-0 pointer-events-none z-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Site Shell */}
-        <div className="relative z-[1] flex flex-col min-h-dvh">
+      <body className="bg-[#0A0A0A] text-[#E8E8E8] font-sans antialiased">
+        <div className="relative flex flex-col min-h-dvh">
           <Header />
-
           <main className="flex-1" id="main-content">
             {children}
           </main>
-
           <Footer />
         </div>
       </body>
