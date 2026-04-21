@@ -43,7 +43,7 @@ export const Header = () => {
       <header className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500",
         scrolled
-          ? "py-3 bg-[#0A0A0A]/90 backdrop-blur-2xl border-b border-white/[0.06]"
+          ? "py-3 bg-[#0D0D0D]/95 backdrop-blur-2xl border-b border-white/[0.09]"
           : "py-4 bg-transparent"
       )}>
         <div className="container-site flex items-center justify-between gap-8">
