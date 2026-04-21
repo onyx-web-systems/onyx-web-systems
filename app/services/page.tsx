@@ -120,7 +120,7 @@ export default function ServicesPage() {
       />
 
       {/* ── Section 2: Services Grid ── */}
-      <section className="relative py-24 md:py-32 bg-[#0A0A0A] overflow-hidden">
+      <section className="relative section bg-base section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
@@ -140,7 +140,7 @@ export default function ServicesPage() {
                 variants={staggerItem}
                 className={cn(
                   "group relative flex flex-col gap-5 p-7 rounded-2xl",
-                  "border border-white/[0.06] bg-[#111111]",
+                  "border bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)]",
                   "hover:border-[rgba(32,160,32,0.2)] hover:-translate-y-1",
                   "transition-all duration-300 overflow-hidden"
                 )}
@@ -202,7 +202,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Section 3: Systems Thinking ── */}
-      <section className="relative py-24 md:py-32 overflow-hidden" style={{ backgroundColor: "#0D0D0D" }}>
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.2), transparent)" }}
@@ -261,7 +261,7 @@ export default function ServicesPage() {
                         "flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300",
                         i === 4
                           ? "border-[#20A020] bg-[rgba(32,160,32,0.1)]"
-                          : "border-white/[0.12] bg-[#111111]"
+                          : "border-white/[0.1] bg-[#1E1E1E]"
                       )}>
                         <span className="text-[10px] font-bold font-mono"
                           style={{ color: i === 4 ? "#20A020" : "#6B6B6B" }}>
@@ -305,7 +305,7 @@ export default function ServicesPage() {
                     <div className="flex flex-col items-center">
                       <div className={cn(
                         "flex items-center justify-center w-10 h-10 rounded-full border-2 flex-shrink-0",
-                        i === 4 ? "border-[#20A020] bg-[rgba(32,160,32,0.1)]" : "border-white/[0.12] bg-[#111111]"
+                        i === 4 ? "border-[#20A020] bg-[rgba(32,160,32,0.1)]" : "border-white/[0.1] bg-[#1E1E1E]"
                       )}>
                         <span className="text-[10px] font-bold font-mono" style={{ color: i === 4 ? "#20A020" : "#6B6B6B" }}>
                           0{i + 1}
@@ -344,7 +344,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Section 4: CTA ── */}
-      <section className="relative py-24 md:py-32 bg-[#0A0A0A] overflow-hidden">
+      <section className="relative section bg-base section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.25), transparent)" }}
