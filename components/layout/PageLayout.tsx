@@ -29,7 +29,7 @@ export const PageHero = ({
 }) => (
   <section
     className={cn(
-      "relative bg-[#0A0A0A] overflow-hidden",
+      "relative bg-deep overflow-hidden section-sep-accent",
       "pt-16 pb-16 md:pt-20 md:pb-20",
       className
     )}
