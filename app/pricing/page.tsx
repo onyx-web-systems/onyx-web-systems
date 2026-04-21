@@ -118,7 +118,7 @@ export default function PricingPage() {
       />
 
       {/* ── Section 2: Pricing Cards ── */}
-      <section className="relative py-24 md:py-32 bg-[#0A0A0A] overflow-hidden">
+      <section className="relative section bg-base section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
@@ -170,11 +170,11 @@ export default function PricingPage() {
                     : "border border-white/[0.06] hover:border-white/[0.12]"
                 )}
                 style={tier.featured ? {
-                  backgroundColor: "#131313",
+                  backgroundColor: "#171717",
                   borderColor: "#20A020",
                   boxShadow: "0 0 60px rgba(32,160,32,0.1), 0 32px 80px rgba(0,0,0,0.5)",
                 } : {
-                  backgroundColor: "#111111",
+                  backgroundColor: "#1E1E1E",
                 }}
               >
                 {/* Featured badge */}
@@ -247,7 +247,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── Section 3: Fit Guidance ── */}
-      <section className="relative py-24 md:py-28 overflow-hidden" style={{ backgroundColor: "#0D0D0D" }}>
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.15), transparent)" }}
@@ -282,7 +282,7 @@ export default function PricingPage() {
                 variants={staggerItem}
                 className={cn(
                   "flex flex-col gap-5 p-7 rounded-2xl",
-                  "border border-white/[0.06] bg-[#111111]",
+                  "border bg-[#1E1E1E] shadow-[0_1px_3px_rgba(0,0,0,0.4),0_4px_12px_rgba(0,0,0,0.25)]",
                   "hover:border-[rgba(32,160,32,0.15)] transition-all duration-300"
                 )}
               >
@@ -312,7 +312,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── Section 4: FAQ Teaser ── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0A] overflow-hidden">
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent)" }}
@@ -351,7 +351,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── Section 5: CTA ── */}
-      <section className="relative py-24 md:py-32 overflow-hidden" style={{ backgroundColor: "#0D0D0D" }}>
+      <section className="relative section bg-deep section-sep-accent overflow-hidden"}>
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.25), transparent)" }}
