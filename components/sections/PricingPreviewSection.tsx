@@ -33,7 +33,7 @@ const TIERS = [
 ];
 
 export const PricingPreviewSection = () => (
-  <section id="pricing" className="relative section bg-page overflow-hidden">
+  <section id="pricing" className="relative section bg-base section-sep overflow-hidden">
     <div className="absolute top-0 inset-x-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
       aria-hidden="true" />
@@ -67,11 +67,11 @@ export const PricingPreviewSection = () => (
               "relative flex flex-col gap-6 p-7 rounded-2xl transition-all duration-300",
               tier.featured
                 ? "border-2 md:-translate-y-3 shadow-2xl"
-                : "border border-white/[0.06] bg-[#111111] hover:border-white/[0.1]"
+                : "border border-white/[0.09] bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)] hover:border-white/[0.14]"
             )}
             style={tier.featured ? {
               borderColor: "#20A020",
-              backgroundColor: "#131313",
+              backgroundColor: "#171717",
               boxShadow: "0 0 48px rgba(32,160,32,0.1), 0 24px 60px rgba(0,0,0,0.45)",
             } : {}}
           >
