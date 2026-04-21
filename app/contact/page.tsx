@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { PageLayout } from "@/components/layout/PageLayout";
+
 import { cn } from "@/lib/utils";
 import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
@@ -93,7 +93,7 @@ export default function ContactPage() {
   };
 
   return (
-    <PageLayout>
+    <div className="pt-[72px]">
 
       {/* ── Section 1: Hero ── */}
       <section className="relative pt-32 pb-20 md:pb-28 overflow-hidden bg-base">
@@ -307,7 +307,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-    </PageLayout>
+    </div>
   );
 }
 
