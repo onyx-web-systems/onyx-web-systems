@@ -28,7 +28,7 @@ const PROBLEMS = [
 ];
 
 export const ProblemSection = () => (
-  <section className="relative section bg-surface overflow-hidden">
+  <section className="relative section bg-base section-sep overflow-hidden">
     <div className="absolute top-0 inset-x-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
       aria-hidden="true" />
@@ -71,7 +71,7 @@ export const ProblemSection = () => (
             <motion.div key={p.title} variants={staggerItem}
               className={cn(
                 "group flex flex-col gap-4 p-6 rounded-2xl",
-                "border border-white/[0.06] bg-[#111111]",
+                "border border-white/[0.09] bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)]",
                 "hover:border-[rgba(32,160,32,0.18)] hover:-translate-y-0.5",
                 "transition-all duration-300 overflow-hidden"
               )}
