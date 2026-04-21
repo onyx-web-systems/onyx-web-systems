@@ -32,7 +32,7 @@ const SERVICES = [
 ];
 
 export const ServicesSection = () => (
-  <section id="services" className="relative section bg-page overflow-hidden">
+  <section id="services" className="relative section bg-raised section-sep overflow-hidden">
     <div className="absolute top-0 inset-x-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
       aria-hidden="true" />
@@ -66,7 +66,7 @@ export const ServicesSection = () => (
           <motion.div key={s.number} variants={staggerItem}
             className={cn(
               "group relative flex flex-col gap-5 p-7 rounded-2xl",
-              "border border-white/[0.06] bg-[#111111]",
+              "border border-white/[0.09] bg-[#1E1E1E] shadow-[0_1px_3px_rgba(0,0,0,0.4),0_4px_12px_rgba(0,0,0,0.25)]",
               "hover:border-[rgba(32,160,32,0.18)] hover:-translate-y-1",
               "transition-all duration-300 overflow-hidden"
             )}
