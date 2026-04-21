@@ -96,7 +96,7 @@ export default function ContactPage() {
     <PageLayout>
 
       {/* ── Section 1: Hero ── */}
-      <section className="relative pt-32 pb-20 md:pb-28 overflow-hidden bg-[#0A0A0A]">
+      <section className="relative pt-32 pb-20 md:pb-28 overflow-hidden bg-base">
 
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px]"
@@ -158,7 +158,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── Section 2: Contact Options ── */}
-      <section className="relative py-16 md:py-20 overflow-hidden" style={{ backgroundColor: "#0D0D0D" }}>
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
@@ -185,7 +185,7 @@ export default function ContactPage() {
       <section
         ref={formRef}
         id="contact-form"
-        className="relative py-20 md:py-28 bg-[#0A0A0A] overflow-hidden"
+        className="relative section bg-base section-sep overflow-hidden"
       >
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.15), transparent)" }}
@@ -255,7 +255,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── Section 4: Closing CTA ── */}
-      <section className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: "#0D0D0D" }}>
+      <section className="relative section bg-raised section-sep overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.25), transparent)" }}
@@ -325,7 +325,7 @@ const ContactCard = ({ option }: {
   const inner = (
     <div className={cn(
       "group flex flex-col gap-4 p-6 rounded-xl h-full",
-      "border border-white/[0.06] bg-[#111111]",
+      "border bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)]",
       "transition-all duration-300",
       option.href && "hover:border-[rgba(32,160,32,0.2)] hover:-translate-y-0.5 cursor-pointer"
     )}>
