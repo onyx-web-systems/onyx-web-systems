@@ -11,13 +11,27 @@ import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
 const TIERS = [
   {
-    name: "Foundation System",
-    price: "Starting at $5,000",
+    name: "Foundation",
+    price: "$2,500",
+    priceNote: "One-time project investment",
+    description:
+      "Custom built website to manage your online presence.",
+    features: [
+      "For small businesses / tight budgets",
+      "Simple site (3–5 pages)",
+      "Template-based or light customization",
+    ],
+    featured: false,
+    cta: "Start a Conversation",
+  },
+  {
+    name: "Growth",
+    price: "$5,000",
     priceNote: "One-time project investment",
     description:
       "A sharp, high-performance website built for credibility, clarity, and conversion readiness.",
     features: [
-      "Custom 5–8 page design",
+      "Fully custom 5–8 page design",
       "Mobile-first development",
       "Conversion-optimized structure",
       "Contact + lead capture forms",
@@ -25,17 +39,17 @@ const TIERS = [
       "Basic SEO infrastructure",
       "30-day post-launch support",
     ],
-    featured: false,
-    cta: "Start a Conversation",
+    featured: true,
+    cta: "Get Started",
   },
   {
-    name: "Growth System",
-    price: "$8,000–$12,000",
+    name: "Premium",
+    price: "$8,000–$10,000",
     priceNote: "Scope-dependent investment",
     description:
       "Our most balanced system for businesses that need design, performance, lead flow, and automation.",
     features: [
-      "Everything in Foundation",
+      "Everything in Growth",
       "CRM + pipeline integration",
       "Automated email sequences",
       "AI chat + lead qualification",
@@ -43,23 +57,25 @@ const TIERS = [
       "Landing page (up to 2)",
       "60-day post-launch support",
     ],
-    featured: true,
-    cta: "Get Started",
+    featured: false,
+    cta: "Start a Conversation",
   },
   {
-    name: "Authority System",
-    price: "Starting at $12,000",
+    name: "Enterprise",
+    price: "$18,000–$25,000",
     priceNote: "Custom scoped per project",
     description:
       "A complete digital growth system for brands ready to scale with authority.",
     features: [
-      "Everything in Growth",
+      "Everything in Premium",
       "Full funnel architecture",
       "Multi-channel automation",
       "AI-powered engagement layer",
       "Custom integrations",
       "Monthly strategy reviews",
       "Priority support + refinement",
+      "Complex builds (apps, portals, automation)",
+      "Retainers + long-term contracts",
     ],
     featured: false,
     cta: "Start a Conversation",
@@ -70,17 +86,22 @@ const TIERS = [
 
 const FIT_CARDS = [
   {
-    system: "Foundation System",
-    best: "You're establishing or refreshing your web presence and need a site that looks serious, loads fast, and converts visitors — without overcomplicating the scope.",
-    signals: ["New business or rebrand", "Outdated or template-based site", "Need credibility fast"],
+    system: "Foundation",
+    best: "You're a small business on a tight budget who needs a clean, professional online presence fast — without overcomplicating the scope.",
+    signals: ["New or early-stage business", "Tight budget", "Need a credible web presence"],
   },
   {
-    system: "Growth System",
-    best: "You're generating traffic but not converting it. You need a connected system — design, automation, and lead flow — working together as one engine.",
+    system: "Growth",
+    best: "You're established and need a fully custom, high-performance site built for conversion — not just a pretty face.",
+    signals: ["Ready to invest in quality", "Needs mobile-first design", "Wants leads to convert"],
+  },
+  {
+    system: "Premium",
+    best: "You're generating traffic but not converting it. You need design, automation, and lead flow working together as one connected engine.",
     signals: ["Traffic without conversions", "Manual follow-up process", "Ready to automate leads"],
   },
   {
-    system: "Authority System",
+    system: "Enterprise",
     best: "You're scaling and need infrastructure that supports it. Complex offers, multiple products, or multi-channel lead flow require a fully engineered growth system.",
     signals: ["High-ticket or complex offer", "Multiple revenue streams", "Requires custom integrations"],
   },
@@ -152,8 +173,8 @@ export default function PricingPage() {
 
           {/* Cards */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start"
-            variants={staggerContainer(0.1, 0.1)}
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 items-start"
+            variants={staggerContainer(0.08, 0.1)}
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig}
@@ -163,10 +184,10 @@ export default function PricingPage() {
                 key={tier.name}
                 variants={staggerItem}
                 className={cn(
-                  "relative flex flex-col gap-7 p-8 rounded-2xl",
+                  "relative flex flex-col gap-6 p-6 rounded-2xl",
                   "transition-all duration-300",
                   tier.featured
-                    ? "border-2 -translate-y-3 md:-translate-y-4"
+                    ? "border-2 xl:-translate-y-3"
                     : "border border-white/[0.06] hover:border-white/[0.12]"
                 )}
                 style={tier.featured ? {
@@ -270,7 +291,7 @@ export default function PricingPage() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4"
             variants={staggerContainer(0.1, 0.1)}
             initial="hidden"
             whileInView="visible"
