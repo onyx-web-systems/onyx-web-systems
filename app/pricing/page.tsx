@@ -103,7 +103,7 @@ const FAQS = [
   },
 ];
 
-/* ─── Page ───────────────────────────────────────────────────────────────────── */
+/* ─── Page ─────────────────────────────────────────────────────── v2 ─────── */
 
 export default function PricingPage() {
   return (
@@ -351,7 +351,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── Section 5: CTA ── */}
-      <section className="relative section bg-deep section-sep-accent overflow-hidden"}>
+      <section className="relative section bg-deep section-sep-accent overflow-hidden">
 
         <div className="absolute top-0 inset-x-0 h-px"
           style={{ background: "linear-gradient(to right, transparent, rgba(32,160,32,0.25), transparent)" }}
