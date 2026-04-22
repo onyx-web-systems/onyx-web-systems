@@ -170,18 +170,18 @@ export default function PricingPage() {
                     : "border border-white/[0.06] hover:border-white/[0.12]"
                 )}
                 style={tier.featured ? {
-                  backgroundColor: "#171717",
+                  backgroundColor: "#1D1D1D",
                   borderColor: "#20A020",
                   boxShadow: "0 0 60px rgba(32,160,32,0.1), 0 32px 80px rgba(0,0,0,0.5)",
                 } : {
-                  backgroundColor: "#1E1E1E",
+                  backgroundColor: "#242424",
                 }}
               >
                 {/* Featured badge */}
                 {tier.featured && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                     <span className="text-[10px] font-bold tracking-[0.12em] uppercase px-4 py-1.5 rounded-full whitespace-nowrap"
-                      style={{ backgroundColor: "#20A020", color: "#0A0A0A" }}>
+                      style={{ backgroundColor: "#20A020", color: "#0F0F0F" }}>
                       Most Popular
                     </span>
                   </div>
