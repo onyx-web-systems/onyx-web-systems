@@ -81,6 +81,50 @@ const SERVICES = [
   },
   {
     number: "06",
+    title: "Brand Identity",
+    description:
+      "We believe a brand should reflect a clear sense of purpose and direction. Our process aligns your mission, identity, and operational practices — ensuring your audience doesn't simply recognize your presence, but trusts and connects with what you stand for. We build enduring brands that foster loyalty, community, and long-term impact.",
+    supports: ["Brand strategy", "Visual identity", "Messaging framework", "Brand guidelines"],
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.25" />
+        <path d="M11 7v4l3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+        <path d="M7.5 17.5l7-13" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    number: "07",
+    title: "Design & UX",
+    description:
+      "We approach every aspect of our creative process through a strategic, user-centered lens — focusing on what will resonate emotionally with your audience. By thoughtfully guiding users through a deliberate and intuitive journey, we position them to take meaningful, outcome-driven actions with clarity and confidence.",
+    supports: ["User research", "Interface design", "Interaction design", "Usability testing"],
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" strokeWidth="1.25" />
+        <rect x="12" y="2" width="8" height="8" rx="2" stroke="currentColor" strokeWidth="1.25" />
+        <rect x="2" y="12" width="8" height="8" rx="2" stroke="currentColor" strokeWidth="1.25" />
+        <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="1.25" />
+        <path d="M16 14v2l1.5 1.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    number: "08",
+    title: "Website Maintenance",
+    description:
+      "We ensure your website operates at peak performance through continuous optimization of functionality, security, and user experience. Website maintenance is an ongoing, disciplined process — including software updates, security monitoring, performance optimization, uptime monitoring, content updates, and SEO integrity — protecting and enhancing your digital presence.",
+    supports: ["Security monitoring", "Performance optimization", "Content updates", "Uptime monitoring"],
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2a9 9 0 100 18A9 9 0 0011 2z" stroke="currentColor" strokeWidth="1.25" />
+        <path d="M11 6v5l3.5 3.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+        <path d="M4.5 4.5l2 2M15.5 15.5l2 2M4.5 17.5l2-2M15.5 6.5l2-2" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    number: "09",
     title: "SEO Infrastructure",
     description:
       "Technical SEO built into the foundation of every site. Fast load times, clean architecture, structured data, and on-page optimization that compounds over time.",
@@ -128,7 +172,7 @@ export default function ServicesPage() {
 
         <div className="container-site">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"
             variants={staggerContainer(0.08, 0.1)}
             initial="hidden"
             whileInView="visible"
