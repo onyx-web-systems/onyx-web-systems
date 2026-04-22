@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { label: "Services",   href: "/services" },
   { label: "Pricing",    href: "/pricing" },
   { label: "Free Audit", href: "/audit" },
-  { label: "Contact",    href: "/contact" },
 ] as const;
 
 const WORK_DROPDOWN = {
@@ -200,6 +199,20 @@ export const Header = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Contact — last item */}
+            <Link href="/contact"
+              className={cn(
+                "relative px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-200 group",
+                pathname === "/contact" ? "text-white" : "text-[#9A9A9A] hover:text-white"
+              )}
+            >
+              Contact
+              <span className={cn(
+                "absolute bottom-1 left-3.5 right-3.5 h-px rounded-full transition-all duration-300 bg-[#20A020]",
+                pathname === "/contact" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+              )} style={{ transformOrigin: "left" }} aria-hidden="true" />
+            </Link>
           </nav>
 
           {/* Desktop CTA */}
@@ -339,6 +352,26 @@ export const Header = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                </motion.li>
+
+                {/* Contact — last */}
+                <motion.li
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (NAV_LINKS.length + 1) * 0.05 + 0.1, duration: 0.28, ease: [0.16,1,0.3,1] }}
+                >
+                  <Link href="/contact" onClick={closeMobile}
+                    className={cn(
+                      "flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-200",
+                      pathname === "/contact" ? "text-white bg-white/[0.06]" : "text-[#C8C8C8] hover:text-white hover:bg-white/[0.04]"
+                    )}
+                  >
+                    Contact
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                      className={cn("transition-colors duration-200", pathname === "/contact" ? "text-[#20A020]" : "text-[#3D3D3D]")}>
+                      <path d="M2.5 6.5H10.5M10.5 6.5L7 3M10.5 6.5L7 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
                 </motion.li>
               </ul>
 
