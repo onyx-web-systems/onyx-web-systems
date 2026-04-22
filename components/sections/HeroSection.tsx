@@ -137,7 +137,7 @@ const SystemsPanel = () => (
     <div className="absolute inset-0 rounded-2xl blur-3xl opacity-[0.12]"
       style={{ background: "radial-gradient(ellipse, #20A020, transparent 70%)" }} aria-hidden="true" />
     <div className="relative rounded-2xl overflow-hidden"
-      style={{ backgroundColor: "#0F0F0F", border: "1px solid rgba(255,255,255,0.1)" }}>
+      style={{ backgroundColor: "#141414", border: "1px solid rgba(255,255,255,0.1)" }}>
       <div className="flex items-center justify-between px-5 py-3"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <div className="flex items-center gap-2">
