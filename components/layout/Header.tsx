@@ -43,12 +43,12 @@ export const Header = () => {
       <header className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500",
         scrolled
-          ? "py-3 bg-[#0D0D0D]/95 backdrop-blur-2xl border-b border-white/[0.09]"
+          ? "py-3 bg-[#141414]/98 backdrop-blur-2xl border-b border-white/[0.1]"
           : "py-4 bg-transparent"
       )}>
         <div className="container-site flex items-center justify-between gap-8">
 
-          <Logo size="md" onClick={closeMobile} />
+          <Logo size="lg" onClick={closeMobile} />
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary navigation">
