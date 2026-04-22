@@ -16,23 +16,23 @@
      Level 3 (surface): #161616  — cards ON level 1 sections
      Level 4 (elevated):#1C1C1C  — cards ON level 2 sections
   ──────────────────────────────────────────────────────────────────────────── */
-  --bg-deep:     #000000;
-  --bg-base:     #0B0B0B;
-  --bg-raised:   #111111;
-  --bg-card:     #161616;
-  --bg-card-alt: #1C1C1C;
-  --bg-input:    #141414;
+  --bg-deep:     #080808;
+  --bg-base:     #0F0F0F;
+  --bg-raised:   #171717;
+  --bg-card:     #1E1E1E;
+  --bg-card-alt: #242424;
+  --bg-input:    #1A1A1A;
 
   /* Legacy aliases — kept for backward compat */
-  --color-bg:        #0B0B0B;
-  --color-surface:   #111111;
-  --color-surface-2: #161616;
-  --color-surface-3: #1C1C1C;
+  --color-bg:        #0F0F0F;
+  --color-surface:   #171717;
+  --color-surface-2: #1E1E1E;
+  --color-surface-3: #242424;
 
   /* ── Borders ── */
-  --border-subtle:   rgba(255,255,255,0.05);
-  --border-default:  rgba(255,255,255,0.08);
-  --border-strong:   rgba(255,255,255,0.13);
+  --border-subtle:   rgba(255,255,255,0.07);
+  --border-default:  rgba(255,255,255,0.11);
+  --border-strong:   rgba(255,255,255,0.18);
   --border-accent:   rgba(32,160,32,0.22);
   --border-accent-strong: rgba(32,160,32,0.38);
 
@@ -41,9 +41,9 @@
   --color-border-strong: rgba(255,255,255,0.13);
 
   /* ── Text ── */
-  --color-text:       #ECECEC;
-  --color-text-muted: #A0A0A0;
-  --color-text-dim:   #6E6E6E;
+  --color-text:       #F0F0F0;
+  --color-text-muted: #B0B0B0;
+  --color-text-dim:   #808080;
   --color-text-xdim:  #404040;
   --color-white:      #FFFFFF;
 
