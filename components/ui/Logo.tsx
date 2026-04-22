@@ -9,11 +9,11 @@ interface LogoProps {
   onClick?: () => void;
 }
 
-/* Display widths — increased for better visibility */
+/* Display widths — increased for maximum visibility */
 const sizeMap = {
-  sm: { displayW: 44,  displayH: 44 },
-  md: { displayW: 64,  displayH: 64 },
-  lg: { displayW: 80,  displayH: 80 },
+  sm: { displayW: 56,  displayH: 56 },
+  md: { displayW: 80,  displayH: 80 },
+  lg: { displayW: 100, displayH: 100 },
 } as const;
 
 export const Logo = ({
@@ -52,7 +52,7 @@ export const Logo = ({
         <span
           className="font-sans font-bold text-white tracking-tight"
           style={{
-            fontSize: size === "sm" ? "1rem" : size === "md" ? "1.1875rem" : "1.375rem",
+            fontSize: size === "sm" ? "1.125rem" : size === "md" ? "1.375rem" : "1.625rem",
             letterSpacing: "-0.01em",
           }}
         >
@@ -61,9 +61,9 @@ export const Logo = ({
         <span
           className="font-sans font-semibold uppercase"
           style={{
-            fontSize: size === "sm" ? "0.5rem" : size === "md" ? "0.5625rem" : "0.625rem",
+            fontSize: size === "sm" ? "0.5625rem" : size === "md" ? "0.625rem" : "0.6875rem",
             letterSpacing: "0.2em",
-            color: "#A0A0A0",
+            color: "#C0C0C0",
           }}
         >
           Web Systems
