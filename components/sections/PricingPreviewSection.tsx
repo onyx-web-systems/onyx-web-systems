@@ -7,26 +7,61 @@ import { staggerContainer, staggerItem, viewportConfig } from "@/lib/motion";
 
 const TIERS = [
   {
-    name: "Foundation System",
-    tagline: "Sharp. Credible. Ready to Convert.",
-    description: "For businesses that need a sharp, credible, conversion-ready web presence that builds trust and drives action.",
-    features: ["Custom 5–8 page design","Conversion-optimized structure","Mobile-first development","Contact + lead capture forms","Performance optimization"],
+    name: "Foundation",
+    tagline: "Clean. Credible. Online.",
+    description: "For small businesses on a tight budget who need a professional web presence fast.",
+    features: [
+      "Simple site (3–5 pages)",
+      "Template-based or light customization",
+      "Mobile responsive",
+      "Contact form",
+    ],
     featured: false,
     cta: "Learn More",
   },
   {
-    name: "Growth System",
-    tagline: "Design. Performance. Automation.",
-    description: "For businesses ready to combine design, performance, automation, and lead flow into one cohesive revenue system.",
-    features: ["Everything in Foundation","CRM + pipeline integration","Automated email sequences","AI chat + lead qualification","Analytics + conversion tracking"],
+    name: "Growth",
+    tagline: "Custom. Fast. Built to Convert.",
+    description: "A sharp, high-performance website built for credibility, clarity, and conversion readiness.",
+    features: [
+      "Fully custom 5–8 page design",
+      "Mobile-first development",
+      "Conversion-optimized structure",
+      "Contact + lead capture forms",
+      "Core Web Vitals optimization",
+      "30-day post-launch support",
+    ],
     featured: true,
     cta: "Get Started",
   },
   {
-    name: "Authority System",
+    name: "Premium",
+    tagline: "Design. Performance. Automation.",
+    description: "Our most balanced system for businesses that need design, performance, lead flow, and automation.",
+    features: [
+      "Everything in Growth",
+      "CRM + pipeline integration",
+      "Automated email sequences",
+      "AI chat + lead qualification",
+      "Landing page (up to 2)",
+      "60-day post-launch support",
+    ],
+    featured: false,
+    cta: "Learn More",
+  },
+  {
+    name: "Enterprise",
     tagline: "Your Complete Digital Growth Engine.",
-    description: "For businesses that want a complete digital growth engine — built, managed, and optimized for scale.",
-    features: ["Everything in Growth","Full funnel architecture","Multi-channel automation","Monthly performance reviews","Priority support + refinement"],
+    description: "A complete digital growth system for brands ready to scale with authority.",
+    features: [
+      "Everything in Premium",
+      "Full funnel architecture",
+      "Multi-channel automation",
+      "AI-powered engagement layer",
+      "Custom integrations",
+      "Monthly strategy reviews",
+      "Retainers + long-term contracts",
+    ],
     featured: false,
     cta: "Learn More",
   },
@@ -55,7 +90,7 @@ export const PricingPreviewSection = () => (
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10"
+        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-10"
         variants={staggerContainer(0.09, 0.1)}
         initial="hidden"
         whileInView="visible"
@@ -64,9 +99,9 @@ export const PricingPreviewSection = () => (
         {TIERS.map((tier) => (
           <motion.div key={tier.name} variants={staggerItem}
             className={cn(
-              "relative flex flex-col gap-6 p-7 rounded-2xl transition-all duration-300",
+              "relative flex flex-col gap-5 p-6 rounded-2xl transition-all duration-300",
               tier.featured
-                ? "border-2 md:-translate-y-3 shadow-2xl"
+                ? "border-2 xl:-translate-y-3 shadow-2xl"
                 : "border border-white/[0.09] bg-[#181818] shadow-[0_1px_3px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.2)] hover:border-white/[0.14]"
             )}
             style={tier.featured ? {
