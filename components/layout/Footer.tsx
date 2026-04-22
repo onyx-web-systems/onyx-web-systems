@@ -51,7 +51,7 @@ export const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden" style={{ backgroundColor: "#000000", borderTop: "1px solid rgba(255,255,255,0.09)" }}>
+    <footer className="relative overflow-hidden" style={{ backgroundColor: "#0C0C0C", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
 
       {/* Subtle top accent gradient */}
       <div
