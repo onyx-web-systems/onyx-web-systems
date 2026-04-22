@@ -451,7 +451,7 @@ const AuditForm = () => {
     <form
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 p-8 rounded-2xl border"
-      style={{ borderColor: "rgba(255,255,255,0.08)", backgroundColor: "#111111" }}
+      style={{ borderColor: "rgba(255,255,255,0.08)", backgroundColor: "#1D1D1D" }}
       noValidate
     >
       {/* Row 1: Name + Email */}
