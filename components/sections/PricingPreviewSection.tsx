@@ -71,14 +71,14 @@ export const PricingPreviewSection = () => (
             )}
             style={tier.featured ? {
               borderColor: "#20A020",
-              backgroundColor: "#171717",
+              backgroundColor: "#1D1D1D",
               boxShadow: "0 0 48px rgba(32,160,32,0.1), 0 24px 60px rgba(0,0,0,0.45)",
             } : {}}
           >
             {tier.featured && (
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                 <span className="text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full whitespace-nowrap"
-                  style={{ backgroundColor: "#20A020", color: "#0A0A0A" }}>
+                  style={{ backgroundColor: "#20A020", color: "#0F0F0F" }}>
                   Most Popular
                 </span>
               </div>
